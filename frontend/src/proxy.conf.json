@@ -1,0 +1,8 @@
+{
+  "/api/json/v1/1/*": {
+    "target": "https://www.thecocktaildb.com/",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+    }
+}

@@ -1,0 +1,11 @@
+<ul>
+  <ng-template  [ngIf]="drinks!=undefined" >
+    <div *ngFor="let drink-detail of drinks.drinks" class="card" style="width: 18rem;">
+      <img class="card-img-top" src="drink-detail.strDrinkThumb" alt="Cocktail image">
+      <div class="card-body">
+        <h5 class="card-title">drink-detail.strDrink</h5>
+      </div>
+    </div>
+  </ng-template>
+
+</ul>
