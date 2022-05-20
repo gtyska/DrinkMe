@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { DrinkListComponent } from './drink-list/drink-list.component';
 
 import { HttpClientModule} from '@angular/common/http';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DrinkListComponent
+    DrinkListComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
