@@ -7,12 +7,16 @@ import { DrinkListComponent } from './drink-list/drink-list.component';
 
 import { HttpClientModule} from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DrinkListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MainPageComponent,
+    NavMenuComponent
   ],
   imports: [
     BrowserModule,

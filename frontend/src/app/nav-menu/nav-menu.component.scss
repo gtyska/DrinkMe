@@ -1,0 +1,28 @@
+
+$backgorund-color: #160B1E;
+$light-blue: #1DE4FF;
+
+#app-name {
+  font-size: 1.2em;
+}
+
+#nav-menu {
+  font-size: 1.4em;
+  font-weight: bold;
+  font-family:'Roboto';
+  height:11vh;
+  margin-top: 10px;
+  background-color: $backgorund-color;
+}
+
+li a {
+  background-color: $backgorund-color;
+}
+
+.nav-link, .navbar-light .navbar-nav .nav-link.active {
+  color: $light-blue;
+}
+
+.navbar {
+  z-index: 9999;
+}

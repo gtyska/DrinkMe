@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+
+$background-color: #160B1E;
+$light-blue: #1DE4FF;
+
+.content {
+  padding-top: 11vh;
+}
+
+nav .nav-link.active {
+  color: $light-blue;
+}
+
+body {
+  background-color: $background-color !important;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
