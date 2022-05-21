@@ -1,0 +1,26 @@
+<div class="content">
+  <div class="row">
+    <div class="col-sm-6" style="padding-left: 10vw">
+      <img class="card-img-top" style="width: 500px" src={{drink.strDrinkThumb}} alt="Cocktail photo">
+    </div>
+    <div class="col-sm-4 alert alert-success" role="alert">
+      <h2 >{{ drink.strDrink }}</h2>
+      <h4 *ngIf="drink.strDrinkAlternate !== null" class="mb-0">{{ drink.strDrinkAlternate }}</h4>
+      <p style="font-weight: bold">Alcoholic category: {{ drink.strAlcoholic }}</p>
+      <hr>
+      <h4 class="mb-0">Ingredients:</h4>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let ingredient of ingredientsAndMeasures">
+          {{ingredient.name}}: {{ingredient.measure}}
+        </li>
+      </ul>
+      <hr>
+      <h4 class="mb-0">Instructions:</h4>
+      <p style="margin-left: 15px"> {{ drink.strInstructions }}</p>
+      <hr>
+      <h4 class="mb-0">Suggested glass:</h4>
+      <p style="margin-left: 15px"> {{ drink.strGlass }}</p>
+    </div>
+  </div>
+
+

@@ -1,0 +1,23 @@
+$light-blue: #1DE4FF;
+$purple: #2c183a;
+$light-purple: rgb(230, 218, 239);
+// $yellow: rgb(255, 136, 0);
+
+p {
+  color: $light-purple;
+}
+
+.alert-success {
+  background-color: $purple;
+  border-style: none;
+  color: $light-purple;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.list-group, .list-group-item {
+  background-color: $purple;
+  border-style: none;
+  color: $light-purple;
+}
+

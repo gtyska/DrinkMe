@@ -1,0 +1,21 @@
+$light-blue: #1DE4FF;
+$neon-red: #FF1700;
+$purple: #2c183a;
+
+.row {
+  padding-left: 10vw;
+  padding-right: 10vw;
+  padding-bottom: 2vh;
+
+  .col-sm-4 {
+    padding-left: 50px;
+    padding-right: 50px;
+
+    .card {
+      background-color: $purple;
+      color: $light-blue;
+    }
+  }
+}
+
+

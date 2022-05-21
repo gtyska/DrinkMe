@@ -8,6 +8,11 @@ export interface DrinkShortcut{
   idDrink: number;
 }
 
+export interface Ingredient {
+  name: string;
+  measure: string;
+}
+
 export interface Drink{
   drinks: DrinkDetails[];
 }

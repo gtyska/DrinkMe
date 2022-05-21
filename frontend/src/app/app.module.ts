@@ -9,6 +9,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { DrinkDetailComponent } from './drink-detail/drink-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     DrinkListComponent,
     PageNotFoundComponent,
     MainPageComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    DrinkDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,28 +1,32 @@
 
-$backgorund-color: #160B1E;
+$background-color: #160B1E;
 $light-blue: #1DE4FF;
 
-#app-name {
-  font-size: 1.2em;
-}
-
 #nav-menu {
-  font-size: 1.4em;
+  font-size: 1.6em;
   font-weight: bold;
   font-family:'Roboto';
   height:11vh;
-  margin-top: 10px;
-  background-color: $backgorund-color;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background-color: $background-color;
+}
+
+.active {
+  text-decoration: underline;
 }
 
 li a {
-  background-color: $backgorund-color;
-}
-
-.nav-link, .navbar-light .navbar-nav .nav-link.active {
-  color: $light-blue;
+  color: $light-blue !important;
+  background-color: $background-color;
 }
 
 .navbar {
   z-index: 9999;
 }
+
+ul > li {
+  margin-left: 20px;
+  margin-right: 40px;
+}
+

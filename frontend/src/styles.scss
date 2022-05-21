@@ -3,8 +3,11 @@
 $background-color: #160B1E;
 $light-blue: #1DE4FF;
 
+$btn-outline-primary-color: #ff009d;
+$btn-outline-primary-hover-color: $light-blue;
+
 .content {
-  padding-top: 11vh;
+  padding-top: 15vh;
 }
 
 nav .nav-link.active {
@@ -19,4 +22,14 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.btn-outline-primary {
+  color: $btn-outline-primary-color !important;
+  border-color: $btn-outline-primary-color !important;
+}
+
+.btn-outline-primary:hover {
+  color: $btn-outline-primary-hover-color !important;
+  background-color: $btn-outline-primary-color !important;
 }
