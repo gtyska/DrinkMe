@@ -26,6 +26,8 @@ import { DrinkDetailComponent } from './drink-detail/drink-detail.component';
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

@@ -1,33 +1,16 @@
-<!-- <div class="content">
-  <ng-template  [ngIf]="drinks!=undefined" >
-    <div id="drink-list" *ngFor="let drinkDetail of drinks.drinks; let i = index" attr.data-index]="i">
-      <div *ngIf="i%3 == 0" class="row ">
-        <div class="col-sm-4">
-          <div class="card test-center">
-              <img class="card-img-top" src={{drinkDetail.strDrinkThumb}} alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">{{drinkDetail.strDrink}}</h5>
-                <a href="#" class="btn btn-outline-primary">See cocktail's details</a>
-              </div>
+<div class="content">
+  <button type="button" class="btn btn-primary btn-sm" (click)="changeTab('Alcoholic')">Alcoholic</button>
+  <button type="button" class="btn btn-primary btn-sm" (click)="changeTab('Non_Alcoholic')">Non Alcoholic</button>
+
+  <div *ngFor="let drinkShortcutGroup of drinksGroups" class="row">
+    <div *ngFor="let drinkShortcut of drinkShortcutGroup" class="col-sm-4">
+      <div class="card test-center">
+          <img class="card-img-top" src={{drinkShortcut.strDrinkThumb}} alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{drinkShortcut.strDrink}}</h5>
+            <a [routerLink]="['/drink', drinkShortcut.idDrink]" class="btn btn-outline-primary">See cocktail's details</a>
           </div>
-         </div>
       </div>
     </div>
-
-  </ng-template>
-</div> -->
-
-
-<div class="content">
-<div *ngFor="let drinkShortcutGroup of drinksGroups" class="row">
-  <div *ngFor="let drinkShortcut of drinkShortcutGroup" class="col-sm-4">
-    <div class="card test-center">
-        <img class="card-img-top" src={{drinkShortcut.strDrinkThumb}} alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{drinkShortcut.strDrink}}</h5>
-          <a [routerLink]="['/drink', drinkShortcut.idDrink]" class="btn btn-outline-primary">See cocktail's details</a>
-        </div>
-    </div>
-   </div>
-</div>
+  </div>
 </div>

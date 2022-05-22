@@ -12,42 +12,25 @@ export class DrinkListComponent implements OnInit {
   drinks: Drinks = {drinks: []};
   drinksGroups: DrinkShortcut[][] = [];
   selectedDrink?: DrinkShortcut;
+  selectedTab = 'Alcoholic';
   constructor(private cocktailApiService: CocktailApiService) {
   }
   ngOnInit(): void {
     this.getRecipes();
   }
 
-  // getRecipes(){
-  //   this.cocktailApiService.getDrinks().subscribe(
-  //     data => {
-  //       this.drinks = data
-  //       console.log(data);
-
-  //       let drink: Drinks = {
-  //         drinks: []
-  //       };
-  //       let count = 0;
-  //       this.drinks.drinks.forEach(element => {
-  //         // debugger;
-  //         drink.drinks.push(element);
-  //         count++;
-  //         if(count === 3){
-  //           this.drinksGroups.push(drink);
-  //           count = 0;
-  //           drink = {
-  //             drinks: []
-  //           }
-  //         }
-  //       });
-  //       console.log(this.drinksGroups)
-  //     }
-  //   );
-  // }
-
+  changeTab(tabName: string) {
+    if(tabName != this.selectedTab) {
+      this.selectedTab = tabName;
+      console.log('selectedTab', this.selectedTab);
+      this.drinks = {drinks: []};
+      this.drinksGroups = [];
+      this.ngOnInit();
+    }
+  }
 
   getRecipes(){
-    this.cocktailApiService.getDrinks().subscribe(
+    this.cocktailApiService.getDrinks(this.selectedTab).subscribe(
       data => {
         this.drinks = data;
         console.log(data);

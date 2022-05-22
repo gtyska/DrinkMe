@@ -2,6 +2,7 @@
 
 $background-color: #160B1E;
 $light-blue: #1DE4FF;
+$pink-neon: #ff009d;
 
 $btn-outline-primary-color: #ff009d;
 $btn-outline-primary-hover-color: $light-blue;
@@ -16,6 +17,7 @@ nav .nav-link.active {
 
 body {
   background-color: $background-color !important;
+  font-family: Roboto;
 }
 
 .center {
@@ -32,4 +34,27 @@ body {
 .btn-outline-primary:hover {
   color: $btn-outline-primary-hover-color !important;
   background-color: $btn-outline-primary-color !important;
+}
+
+.navbar-nav .nav-link{
+  text-align: center;
+  align-content: center;
+  width: 10vw;
+  border: none;
+}
+
+.active {
+  background-color: $pink-neon;
+  border: solid;
+  border-color: $pink-neon;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.navbar-nav .nav-link.active {
+  background-color: $pink-neon;
+  border: solid;
+  border-color: $pink-neon;
+  text-decoration: none;
+  border-radius: 10px;
 }

@@ -3,17 +3,13 @@ $background-color: #160B1E;
 $light-blue: #1DE4FF;
 
 #nav-menu {
-  font-size: 1.6em;
+  font-size: 1.5em;
   font-weight: bold;
   font-family:'Roboto';
   height:11vh;
-  padding-top: 2vh;
-  padding-bottom: 2vh;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
   background-color: $background-color;
-}
-
-.active {
-  text-decoration: underline;
 }
 
 li a {
