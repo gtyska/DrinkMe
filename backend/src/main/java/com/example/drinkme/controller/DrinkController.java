@@ -1,12 +1,15 @@
 package com.example.drinkme.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.example.drinkme.entity.Category;
 import com.example.drinkme.entity.Drink;
+import com.example.drinkme.entity.DrinkCategory;
 import com.example.drinkme.repository.CategoryRepository;
 import com.example.drinkme.repository.DrinkRepository;
+import com.example.drinkme.repository.DrinkCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -24,16 +27,20 @@ public class DrinkController {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    DrinkCategoryRepository drinkCategoryRepository;
 
+    // gets all drinks
     @RequestMapping
     public ResponseEntity<Object> findDrinks() {
         return ResponseEntity.ok(drinkRepository.findAll());
     }
 
+    // gets drink object
     @RequestMapping("/{id}")
     public ResponseEntity<Object> findDrinkById(@PathVariable long id) {
         Optional<Drink> drink = drinkRepository.findById(id);
-        if (drink != null) {
+        if (drink.isPresent()) {
             return ResponseEntity.ok(drink);
         } 
         else {
@@ -41,11 +48,26 @@ public class DrinkController {
         }
     }
 
+    // gets drinks form category
     @GetMapping("/categoryId={categoryId}")
     public ResponseEntity<Object> findDrinksByCategoryId(@PathVariable long categoryId) {
         Optional<Category> category = categoryRepository.findById(categoryId);
-        if (category != null) {
-            List<Drink> drinks = category.get().getDrinks();
+        if (category.isPresent()) {
+            List<DrinkCategory> drinkCategoryList = drinkCategoryRepository.findByCategoryId(categoryId);
+            List<Drink> drinks = new ArrayList<Drink>();
+            if(drinkCategoryList.size() > 0) {
+                for(DrinkCategory drinkCategory : drinkCategoryList){
+                    System.out.println("znalazłem takie categoryID");
+                    long drinkId = drinkCategory.getDrinkId();
+                    System.out.println(drinkId);
+                    Optional<Drink> drink = drinkRepository.findById(drinkId);
+                    if(drink.isPresent()){
+                        System.out.println("Is present");
+                        drinks.add(drink.get());
+                        System.out.println(drink);
+                    }
+                }
+            }
             return ResponseEntity.ok(drinks);
         } 
         else {
@@ -53,36 +75,57 @@ public class DrinkController {
         }
     }
 
+    // create drink object
+    @PostMapping()
+    public ResponseEntity<Object> Insert(@RequestBody Drink drink){
+        return ResponseEntity.ok(drinkRepository.save(drink));
+    }
+
+    // puts drinks to category
     @PostMapping("/categoryId={categoryId}")
-    public ResponseEntity<Object> Insert(@PathVariable long categoryId, @RequestBody Drink drink){
-        
+    public ResponseEntity<Object> Insert(@PathVariable long categoryId, @RequestBody List<Long> drinkIdList){
         Optional<Category> category = categoryRepository.findById(categoryId);
-        if (category != null) {
-            List<Drink> drinks = category.get().getDrinks();
-            drinks.add(drink);
-            category.get().setDrinks(drinks);
-            return ResponseEntity.ok(drinkRepository.save(drink));
+        int numberOfRowsCreated = 0;
+        if (category.isPresent()) {
+            for(long drinkId: drinkIdList){
+                Optional<Drink> drink = drinkRepository.findById(drinkId);
+                if(drink.isPresent()) {
+                    List<DrinkCategory> drinkCategoryList = drinkCategoryRepository.findByDrinkIdAndCategoryId(drinkId, categoryId);
+                    if (drinkCategoryList.size()==0){
+                        DrinkCategory drinkCategory = new DrinkCategory(drinkId, categoryId);
+                        drinkCategoryRepository.save(drinkCategory);
+                        numberOfRowsCreated += 1;
+                    }  
+                }
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(numberOfRowsCreated);
         } 
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
+    // updates only cocktailId or rating
     @PatchMapping("/{id}")
     public ResponseEntity<Drink> updateDrink(@PathVariable("id") long id, @RequestBody Drink drink) {
         Drink foundedDrink = drinkRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Drink: id " + id + " is not found"));
-        foundedDrink.setDrinkId(drink.getDrinkId());
+        foundedDrink.setCocktailId(drink.getCocktailId());
+        foundedDrink.setRating(drink.getRating());
         final Drink updatedDrink = drinkRepository.save(foundedDrink);
         return ResponseEntity.ok(updatedDrink);
     }
 
-    @DeleteMapping("/{categoryId}/{drinkId}")
-    public ResponseEntity<Object> delete(@PathVariable("categoryId") long categoryId, @PathVariable("drinkId") long drinkId) {
-        Optional<Category> category = categoryRepository.findById(categoryId);
-        if (category != null) {
-            category.get().getDrinks().removeIf(obj -> obj.getId() == drinkId);
-            // drinkRepository.deleteById(drinkId);  -- dont delete drink from database, just from category
-            categoryRepository.save(category.get());
+    // deletes drink
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable("id") long id) {
+        Optional<Drink> drink = drinkRepository.findById(id);
+        if (drink.isPresent()) {
+            drinkRepository.deleteById(id);
+            // delete all DrinkCategory connected with deleted drink
+            List<DrinkCategory> drinkCategoryList = drinkCategoryRepository.findByDrinkId(id);
+            for(DrinkCategory drinkCategory : drinkCategoryList){
+                drinkCategoryRepository.deleteById(drinkCategory.getId());
+            }
             return ResponseEntity.status(HttpStatus.OK).body(null);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

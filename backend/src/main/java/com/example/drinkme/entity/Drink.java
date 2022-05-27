@@ -1,11 +1,11 @@
 package com.example.drinkme.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -15,14 +15,18 @@ public class Drink {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull(message = "Drink Id is mandatory")
-    private long drinkId;
+    @Column(nullable = false, unique = true)
+    private String cocktailId;
+
+    @Column(nullable = true, unique = false)
+    private int rating;
 
     public Drink() {
     }
 
-    public Drink(long drinkId) {
-        this.drinkId = drinkId;
+    public Drink(String cocktailId, int rating) {
+        this.cocktailId = cocktailId;
+        this.rating = rating;
     }
 
     public long getId() {
@@ -34,16 +38,24 @@ public class Drink {
     }
 
 
-    public long getDrinkId() {
-        return id;
+    public String getCocktailId() {
+        return cocktailId;
     }
 
-    public void setDrinkId(long drinkId) {
-        this.drinkId = drinkId;
+    public void setCocktailId(String cocktailId) {
+        this.cocktailId = cocktailId;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+    
     @Override
     public String toString() {
-        return "Drink: " + id + "\nDrink Id: " + drinkId;
+        return "Drink: " + id + "\nCocktail Id: " + cocktailId + "\nRating: " + rating;
     }
 }

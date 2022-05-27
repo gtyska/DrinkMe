@@ -1,43 +1,32 @@
 package com.example.drinkme.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name = "drinks")
+@Table(name = "categories")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotBlank(message = "Name is mandatory")
-    @Length(max = 50)
+    @Column(length = 100, nullable = false, unique = true)
     private String name;
 
-    @Length(max = 500)
+    @Column(length = 500, nullable = true, unique = false)
     private String description;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Drink> drinks;
 
     public Category() {
     }
 
-    public Category(String name, String description, List<Drink> drinks) {
+    public Category(String name, String description) {
         this.name = name;
         this.description = description;
-        this.drinks = drinks;
     }
 
     public long getId() {
@@ -62,14 +51,6 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Drink> getDrinks() {
-        return drinks;
-    }
-
-    public void setDrinks(List<Drink> drinks) {
-        this.drinks = drinks;
     }
 
     @Override
