@@ -48,6 +48,19 @@ public class DrinkController {
         }
     }
 
+    // gets drink object
+    @RequestMapping("/cocktailId={cocktailId}")
+    public ResponseEntity<Object> findDrinkByCocktailId(@PathVariable String cocktailId) {
+        List<Drink> drinkList = drinkRepository.findByCocktailId(cocktailId);
+        if (drinkList.size() > 0) {
+            Drink drink = drinkList.get(0);
+            return ResponseEntity.ok(drink);
+        } 
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
     // gets drinks form category
     @GetMapping("/categoryId={categoryId}")
     public ResponseEntity<Object> findDrinksByCategoryId(@PathVariable long categoryId) {
@@ -123,6 +136,25 @@ public class DrinkController {
             drinkRepository.deleteById(id);
             // delete all DrinkCategory connected with deleted drink
             List<DrinkCategory> drinkCategoryList = drinkCategoryRepository.findByDrinkId(id);
+            for(DrinkCategory drinkCategory : drinkCategoryList){
+                drinkCategoryRepository.deleteById(drinkCategory.getId());
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    // deletes drink
+    @DeleteMapping("/cocktailId={cocktailId}")
+    public ResponseEntity<Object> deleteByCocktailId(@PathVariable("cocktailId") String cocktailId) {
+        List<Drink> drinkList = drinkRepository.findByCocktailId(cocktailId);
+        if (drinkList.size() > 0) {
+            Drink drinkToDelete = drinkList.get(0); // list can have max 1 element (cocktailId is unique)
+            Long drinkId = drinkToDelete.getId();
+            drinkRepository.deleteById(drinkId);
+            // delete all DrinkCategory connected with deleted drink
+            List<DrinkCategory> drinkCategoryList = drinkCategoryRepository.findByDrinkId(drinkId);
             for(DrinkCategory drinkCategory : drinkCategoryList){
                 drinkCategoryRepository.deleteById(drinkCategory.getId());
             }

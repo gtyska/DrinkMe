@@ -42,5 +42,4 @@ public class DrinkCategoryController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-    
 }
