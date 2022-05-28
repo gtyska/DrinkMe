@@ -1,8 +1,8 @@
-export interface Drinks{
-  drinks: DrinkShortcut[];
+export interface Cocktails{
+  drinks: CocktailShortcut[];
 }
 
-export interface DrinkShortcut{
+export interface CocktailShortcut{
   strDrink: string;
   strDrinkThumb: string;
   idDrink: number;
@@ -13,11 +13,11 @@ export interface Ingredient {
   measure: string;
 }
 
-export interface Drink{
-  drinks: DrinkDetails[];
+export interface Cocktail{
+  drinks: CocktailDetails[];
 }
 
-export interface DrinkDetails{
+export interface CocktailDetails{
   idDrink: number;
   strDrink: string;
   strDrinkAlternate: string;

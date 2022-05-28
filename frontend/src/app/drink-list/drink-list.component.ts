@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DrinkShortcut, Drinks } from '../cocktail-api';
+import { Component, OnInit, Renderer2 } from '@angular/core';
+import { CocktailShortcut, Cocktails } from '../cocktail-api';
 import { CocktailApiService } from '../cocktail-api.service';
 
 @Component({
@@ -9,11 +9,13 @@ import { CocktailApiService } from '../cocktail-api.service';
 })
 
 export class DrinkListComponent implements OnInit {
-  drinks: Drinks = {drinks: []};
-  drinksGroups: DrinkShortcut[][] = [];
-  selectedDrink?: DrinkShortcut;
+  drinks: Cocktails = {drinks: []};
+  drinksGroups: CocktailShortcut[][] = [];
+  selectedDrink?: CocktailShortcut;
   selectedTab = 'Alcoholic';
-  constructor(private cocktailApiService: CocktailApiService) {
+  constructor(
+    private cocktailApiService: CocktailApiService,
+    private renderer: Renderer2) {
   }
   ngOnInit(): void {
     this.getRecipes();
@@ -30,12 +32,12 @@ export class DrinkListComponent implements OnInit {
   }
 
   getRecipes(){
-    this.cocktailApiService.getDrinks(this.selectedTab).subscribe(
+    this.cocktailApiService.getCocktails(this.selectedTab).subscribe(
       data => {
         this.drinks = data;
         console.log(data);
         this.drinks.drinks.reverse();
-        let drinkGroup: DrinkShortcut[] = [];
+        let drinkGroup: CocktailShortcut[] = [];
         let count = 0;
         this.drinks.drinks.forEach(element => {
           drinkGroup.push(element);
@@ -55,7 +57,7 @@ export class DrinkListComponent implements OnInit {
   }
 
 
-  onSelect(drink: DrinkShortcut): void {
+  onSelect(drink: CocktailShortcut): void {
     this.selectedDrink = drink;
   }
 

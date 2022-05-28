@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Drink, DrinkDetails, Ingredient } from '../cocktail-api';
+import { CocktailDetails, Ingredient } from '../cocktail-api';
 import { CocktailApiService } from '../cocktail-api.service';
+import { Drink } from '../drinkme'
+
+import {RED, WHITE} from '../../icon-color';
 
 import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+
+
+import { NgModule } from "@angular/core";
+import { DrinkmeService } from '../drinkme.service';
+
+
 
 @Component({
   selector: 'app-drink-detail',
@@ -13,19 +22,24 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./drink-detail.component.scss']
 })
 export class DrinkDetailComponent implements OnInit {
-  drink: DrinkDetails | undefined;
+  drinkDetails: CocktailDetails | undefined;
+  drink: Drink | undefined;
   id: string = "";
   ingredientsAndMeasures: Ingredient[] = [];
+  isDrinkFavourite = false;
+  iconColor = WHITE;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private cocktailApiService: CocktailApiService,
+    private drinkmeService: DrinkmeService,
     @Inject(DOCUMENT) private document: Document
   ) { }
 
   ngOnInit(): void {
     this.getIdFromURL();
+    this.getDrinkExternal();
     this.getDrink();
   }
 
@@ -54,134 +68,170 @@ export class DrinkDetailComponent implements OnInit {
   }
 
   getDrink(){
-    this.cocktailApiService.getDrink(this.id).subscribe(
+    this.drinkmeService.getDrink(this.id).subscribe(
+      data => {
+        this.drink = data;
+        console.log(data);
+        if(this.drink != undefined) {
+          this.iconColor = RED;
+        }
+      }
+    );
+    console.log('drinkme drink', this.drink);
+  }
+
+  changeFavouriteState() {
+    if(this.drink == undefined) {
+      let drink = {
+        id: null,
+        cocktailId: this.id,
+        rating: 0
+      }
+      this.drinkmeService.createDrink(drink).subscribe(
+        data => {
+          this.drink = data;
+          console.log(data);
+          if(this.drink != undefined) {  // got data correctly
+            this.iconColor = RED;
+          }
+        }
+      )
+    }
+    else {
+      if (this.drink.id != null) {
+        console.log('drinkId', this.drink.id);
+        console.log('drink to delete', this.drink);
+        let status = "";
+
+        this.drinkmeService.deleteDrink(this.drink.id).subscribe({
+          next: data => {
+            this.drink = undefined;
+            this.iconColor = WHITE;
+
+          }
+        });
+
+
+      }
+    }
+  }
+
+
+  getDrinkExternal(){
+    this.cocktailApiService.getCocktail(this.id).subscribe(
       data => {
         if (data === null) {
           console.log('data is null');
           this.router.navigateByUrl('empty-glass');
         }
         else {
-          this.drink = data.drinks[0];
-          console.log('drink', this.drink);
+          this.drinkDetails = data.drinks[0];
+          console.log('drink', this.drinkDetails);
           let ingredient = "";
-          // const attrIngredientName = 'strIngredient';
-          // const attrMeasureName = 'strMeasure1';
-          // for (let i = 1; i < 16; i += 1)  {
-          //   const attrName: any = attrIngredientName.concat(i.toString());
-          //   console.log('attrIngrName', attrIngredientName);
-          //   ingredient = this.drink[attrName];
-          //   if(ingredient !== null){
-          //     this.ingredientsAndMeasures.push({
-          //       name: ingredient,
-          //       measure: this.drink[attrMeasureName]
-          //     });
-          // }
 
-          // }
-
-          ingredient = this.drink['strIngredient1'];
+          ingredient = this.drinkDetails['strIngredient1'];
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink['strMeasure1']
+              measure: this.drinkDetails['strMeasure1']
             });
           }
-          ingredient = this.drink.strIngredient2;
+          ingredient = this.drinkDetails.strIngredient2;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure2
+              measure: this.drinkDetails.strMeasure2
             });
           }
-          ingredient = this.drink.strIngredient3;
+          ingredient = this.drinkDetails.strIngredient3;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure3
+              measure: this.drinkDetails.strMeasure3
             });
           }
-          ingredient = this.drink.strIngredient4;
+          ingredient = this.drinkDetails.strIngredient4;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure4
+              measure: this.drinkDetails.strMeasure4
             });
           }
-          ingredient = this.drink.strIngredient5;
+          ingredient = this.drinkDetails.strIngredient5;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure5
+              measure: this.drinkDetails.strMeasure5
             });
           }
-          ingredient = this.drink.strIngredient6;
+          ingredient = this.drinkDetails.strIngredient6;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure6
+              measure: this.drinkDetails.strMeasure6
             });
           }
-          ingredient = this.drink.strIngredient7;
+          ingredient = this.drinkDetails.strIngredient7;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure7
+              measure: this.drinkDetails.strMeasure7
             });
           }
-          ingredient = this.drink.strIngredient8;
+          ingredient = this.drinkDetails.strIngredient8;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure8
+              measure: this.drinkDetails.strMeasure8
             });
           }
-          ingredient = this.drink.strIngredient9;
+          ingredient = this.drinkDetails.strIngredient9;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure9
+              measure: this.drinkDetails.strMeasure9
             });
           }
-          ingredient = this.drink.strIngredient10;
+          ingredient = this.drinkDetails.strIngredient10;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure10
+              measure: this.drinkDetails.strMeasure10
             });
           }
-          ingredient = this.drink.strIngredient11;
+          ingredient = this.drinkDetails.strIngredient11;
           if(ingredient !== null && ingredient != "" ){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure11
+              measure: this.drinkDetails.strMeasure11
             });
           }
-          ingredient = this.drink.strIngredient12;
+          ingredient = this.drinkDetails.strIngredient12;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure12
+              measure: this.drinkDetails.strMeasure12
             });
           }
-          ingredient = this.drink.strIngredient13;
+          ingredient = this.drinkDetails.strIngredient13;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure13
+              measure: this.drinkDetails.strMeasure13
             });
           }
-          ingredient = this.drink.strIngredient14;
+          ingredient = this.drinkDetails.strIngredient14;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure14
+              measure: this.drinkDetails.strMeasure14
             });
           }
-          ingredient = this.drink.strIngredient15;
+          ingredient = this.drinkDetails.strIngredient15;
           if(ingredient !== null && ingredient != ""){
             this.ingredientsAndMeasures.push({
               name: ingredient,
-              measure: this.drink.strMeasure15
+              measure: this.drinkDetails.strMeasure15
             });
           }
           console.log('ingredients', this.ingredientsAndMeasures)

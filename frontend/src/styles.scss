@@ -15,9 +15,11 @@ nav .nav-link.active {
   color: $light-blue;
 }
 
+html, body { height: 100%; }
+
 body {
   background-color: $background-color !important;
-  font-family: Roboto;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .center {
@@ -48,13 +50,17 @@ body {
   border: solid;
   border-color: $pink-neon;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .navbar-nav .nav-link.active {
   background-color: $pink-neon;
-  border: solid;
-  border-color: $pink-neon;
+  border: none;
+  // border: solid;
+  // border-color: $pink-neon;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 5px;
 }
+
+
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

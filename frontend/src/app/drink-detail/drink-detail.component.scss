@@ -1,11 +1,55 @@
 $light-blue: #1DE4FF;
 $purple: #2c183a;
 $light-purple: rgb(230, 218, 239);
-// $yellow: rgb(255, 136, 0);
+$background-color: #160B1E;
 
 p {
   color: $light-purple;
 }
+
+.drink-details {
+  position: relative;
+}
+
+.topright {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+
+mat-icon, material-icons {
+  height: 38px;
+  width: 38px;
+  font-size: 45px;
+}
+
+.icon-selected {
+  color: red;
+}
+
+.icon-selected svg {
+  fill: red;
+}
+
+.icon-not-selected svg {
+  fill: white;
+  border: solid;
+  border-color: red;
+}
+
+// .icon-not-selected {
+//   fill: white !important;
+// }
+
+button {
+  background-color: $purple;
+  border: none;
+}
+
+// .icon-checked {
+//   fill: red !important;
+// }
 
 .alert-success {
   background-color: $purple;
@@ -21,3 +65,14 @@ p {
   color: $light-purple;
 }
 
+
+p, h4 {
+  font-size: 500 !important;
+}
+
+#name-and-icon {
+  display: block;
+  button {
+    float: right;
+  }
+}

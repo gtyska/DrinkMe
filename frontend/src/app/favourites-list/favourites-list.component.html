@@ -1,0 +1,14 @@
+<div class="content">
+  <div *ngFor="let cocktailShortcutGroup of cocktailsGroups" class="row">
+    <div *ngFor="let cocktailShortcut of cocktailShortcutGroup" class="col-sm-4">
+      <div class="card test-center">
+          <img class="card-img-top" src={{cocktailShortcut.strDrinkThumb}} alt="Card image cap">
+          <div class="card-body">
+            <p class="card-title h5">{{cocktailShortcut.strDrink}}</p>
+            <a [routerLink]="['/drink', cocktailShortcut.idDrink]" class="btn btn-outline-primary">See cocktail's details</a>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,13 +1,15 @@
 <div class="content">
-  <button type="button" class="btn btn-primary btn-sm" (click)="changeTab('Alcoholic')">Alcoholic</button>
-  <button type="button" class="btn btn-primary btn-sm" (click)="changeTab('Non_Alcoholic')">Non Alcoholic</button>
+  <div class="nav-menu-drinks">
+    <button type="button" [ngClass]="{'selected': selectedTab === 'Alcoholic' }" class="btn btn-primary btn-lg" (click)="changeTab('Alcoholic')">Alcoholic</button>
+    <button type="button" [ngClass]="{'selected': selectedTab === 'Non_Alcoholic' }" class="btn btn-primary btn-lg" (click)="changeTab('Non_Alcoholic')">Non Alcoholic</button>
+  </div>
 
   <div *ngFor="let drinkShortcutGroup of drinksGroups" class="row">
     <div *ngFor="let drinkShortcut of drinkShortcutGroup" class="col-sm-4">
       <div class="card test-center">
           <img class="card-img-top" src={{drinkShortcut.strDrinkThumb}} alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">{{drinkShortcut.strDrink}}</h5>
+            <p class="card-title h5">{{drinkShortcut.strDrink}}</p>
             <a [routerLink]="['/drink', drinkShortcut.idDrink]" class="btn btn-outline-primary">See cocktail's details</a>
           </div>
       </div>

@@ -1,32 +1,33 @@
 <div class="content">
 
-  <div class="drink-details" *ngIf="drink !== undefined">
+  <div class="drink-details" *ngIf="drinkDetails !== undefined">
     <div class="row">
       <div class="col-sm-6" style="padding-left: 10vw">
-        <img class="card-img-top" style="width: 500px" src={{drink.strDrinkThumb}} alt="Cocktail photo">
+        <img class="card-img-top" style="width: 500px" src={{drinkDetails.strDrinkThumb}} alt="Cocktail photo">
       </div>
       <div class="col-sm-4 alert alert-success" role="alert">
-        <h2 >{{ drink.strDrink }}</h2>
+        <div id="name-and-icon">
+          <h1 >{{ drinkDetails.strDrink }}</h1>
+          <button class="topright" (click)="changeFavouriteState()" mat-icon-button>
+            <mat-icon [ngStyle]="{'color': iconColor}" aria-hidden="false" class="icon-not-selected" aria-label="Example home icon">favorite</mat-icon>
+          </button>
+        </div>
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rose" class="bi bi-heart" viewBox="0 0 16 16">
-          <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-        </svg>
-
-        <h4 *ngIf="drink.strDrinkAlternate !== null" class="mb-0">{{ drink.strDrinkAlternate }}</h4>
-        <p style="font-weight: bold">Alcoholic category: {{ drink.strAlcoholic }}</p>
+        <h2 *ngIf="drinkDetails.strDrinkAlternate !== null" class="mb-0">{{ drinkDetails.strDrinkAlternate }}</h2>
+        <p style="font-weight: bold">Alcoholic category: {{ drinkDetails.strAlcoholic }}</p>
         <hr>
-        <h4 class="mb-0">Ingredients:</h4>
+        <h2 class="mb-0">Ingredients:</h2>
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let ingredient of ingredientsAndMeasures">
             {{ingredient.name}}: {{ingredient.measure}}
           </li>
         </ul>
         <hr>
-        <h4 class="mb-0">Instructions:</h4>
-        <p style="margin-left: 15px"> {{ drink.strInstructions }}</p>
+        <h2 class="mb-0">Instructions:</h2>
+        <p style="margin-left: 15px"> {{ drinkDetails.strInstructions }}</p>
         <hr>
-        <h4 class="mb-0">Suggested glass:</h4>
-        <p style="margin-left: 15px"> {{ drink.strGlass }}</p>
+        <h2 class="mb-0">Suggested glass:</h2>
+        <p style="margin-left: 15px"> {{ drinkDetails.strGlass }}</p>
       </div>
     </div>
   </div>

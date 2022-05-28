@@ -1,0 +1,13 @@
+$light-blue: #1DE4FF;
+$neon-red: #FF1700;
+$purple: #2c183a;
+$pink-neon: #ff009d;
+$background-color: #160B1E;
+
+.card {
+  background-color: $purple;
+  color: $light-blue;
+  width: 55vw;
+  margin: auto;
+  margin-bottom: 2vh;
+}

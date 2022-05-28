@@ -10,6 +10,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { MainPageComponent } from './main-page/main-page.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { DrinkDetailComponent } from './drink-detail/drink-detail.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FavouritesListComponent } from './favourites-list/favourites-list.component';
+import { ArticlesListComponent } from './articles-list/articles-list.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +21,15 @@ import { DrinkDetailComponent } from './drink-detail/drink-detail.component';
     PageNotFoundComponent,
     MainPageComponent,
     NavMenuComponent,
-    DrinkDetailComponent
+    DrinkDetailComponent,
+    FavouritesListComponent,
+    ArticlesListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NoopAnimationsModule,
   ],
   providers: [],
   bootstrap: [
