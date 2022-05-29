@@ -10,7 +10,6 @@ import { catchError, Observable, of, tap } from 'rxjs';
 export class CocktailApiService {
   // private cocktailDbUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
   private cocktailDbUrl = '/api/json/v1/1/';
-
   constructor(private http: HttpClient) { }
 
   httpOptions = {
