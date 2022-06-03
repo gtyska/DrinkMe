@@ -27,8 +27,11 @@ DELETE : http://localhost:8080/api/drinks/{drinkId}
 ### Get drinks
 GET : http://localhost:8080/api/drinks/
 
-### Get drink
+### Get drink by drinkId
 GET : http://localhost:8080/api/drinks/{drinkId}
+
+### Get drink by cocktailId
+GET : http://localhost:8080/api/drinks/cocktailId={cocktailId}
 
 ## Licence
 ![MIT Licence](https://img.shields.io/badge/license-MIT-e8058f)
