@@ -6,7 +6,7 @@ The recipes are taken from [TheCocktailDB](https://www.thecocktaildb.com/).
 ![Angular](https://img.shields.io/badge/Angular-D82D2F?style=for-the-badge&logo=angular&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-7652B0?style=for-the-badge&logo=bootstrap&logoColor=white)
 ### Backend
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springBoot&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-31648C?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ## Licence
