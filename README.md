@@ -9,30 +9,6 @@ The recipes are taken from [TheCocktailDB](https://www.thecocktaildb.com/).
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springBoot&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-31648C?style=for-the-badge&logo=postgresql&logoColor=white)
 
-## Endpoints documentation
-### Create drink
-POST : http://localhost:8080/api/drinks/
-<br> example of body:
-{
-    "id": null,
-    "cocktailId":"3333",
-    "rating": null
-}
-
-where cocktailId is id of cocktail from [TheCocktailDB](https://www.thecocktaildb.com/)
-
-### Delete drink
-DELETE : http://localhost:8080/api/drinks/{drinkId}
-
-### Get drinks
-GET : http://localhost:8080/api/drinks/
-
-### Get drink by drinkId
-GET : http://localhost:8080/api/drinks/{drinkId}
-
-### Get drink by cocktailId
-GET : http://localhost:8080/api/drinks/cocktailId={cocktailId}
-
 ## Licence
 ![MIT Licence](https://img.shields.io/badge/license-MIT-e8058f)
 
