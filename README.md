@@ -1,6 +1,9 @@
 # DrinkMe 🥂
 DrinkMe is an application to look for cocktails and save them. It allows you to have all of your fovourite cocktails recipes in one place!
 The recipes are taken from [TheCocktailDB](https://www.thecocktaildb.com/).
+
+In API folder there is a short API endpoints documentation with Postman Collection.
+
 ## Tech stack
 ### Frontend
 ![Angular](https://img.shields.io/badge/Angular-D82D2F?style=for-the-badge&logo=angular&logoColor=white)
